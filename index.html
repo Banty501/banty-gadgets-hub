@@ -8,37 +8,51 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --primary:#0d6efd;
+  --bg:#f4f6f9;
+  --text:#222;
+}
+
+.dark{
+  --bg:#121212;
+  --text:#eee;
+}
+
 body{
   margin:0;
   font-family:'Poppins', sans-serif;
-  background:#f5f7fa;
-  color:#222;
+  background:var(--bg);
+  color:var(--text);
 }
 
-/* NAVIGATION */
+/* NAVBAR */
 nav{
-  background:#0d6efd;
+  background:var(--primary);
   color:white;
   padding:15px;
-  text-align:center;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 nav a{
   color:white;
-  margin:0 15px;
   text-decoration:none;
+  margin:0 10px;
   font-weight:600;
 }
 
-/* HEADER */
-header{
-  background:#0d6efd;
+/* BANNER */
+.banner{
+  background:linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
+  url('https://via.placeholder.com/1200x400?text=BANTY+GADGETS+HUB');
   color:white;
   text-align:center;
-  padding:40px 20px;
+  padding:80px 20px;
 }
-header h1{ margin:0; font-size:2.5em; }
+.banner h1{margin:0;font-size:2.5em}
 
-/* SECTION */
+/* CONTAINER */
 .container{
   max-width:1100px;
   margin:auto;
@@ -46,27 +60,30 @@ header h1{ margin:0; font-size:2.5em; }
 }
 
 /* PRODUCTS */
-.products{
+.grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
 }
+
 .card{
   background:white;
   padding:20px;
   border-radius:10px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
   text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
+.dark .card{background:#1e1e1e}
+
 .card img{
   width:100%;
   border-radius:8px;
 }
+
 .price{
-  color:#0d6efd;
+  color:var(--primary);
   font-weight:700;
   font-size:1.2em;
-  margin:10px 0;
 }
 
 /* BUTTON */
@@ -74,92 +91,118 @@ header h1{ margin:0; font-size:2.5em; }
   display:inline-block;
   background:#25D366;
   color:white;
-  padding:12px 25px;
-  border-radius:30px;
+  padding:10px 20px;
+  border-radius:25px;
   text-decoration:none;
-  font-weight:600;
+  margin-top:10px;
 }
 
-/* FOOTER */
+/* FORM */
+form input, form textarea{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
 footer{
   background:#222;
   color:white;
   text-align:center;
   padding:20px;
-  margin-top:40px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- NAV -->
 <nav>
-<a href="#home">Home</a>
-<a href="#products">Products</a>
-<a href="#prices">Price List</a>
+<div><strong>BANTY GADGETS HUB</strong></div>
+<div>
+<a href="#phones">Phones</a>
+<a href="#laptops">Laptops</a>
+<a href="#gaming">Gaming</a>
 <a href="#contact">Contact</a>
+<button onclick="toggleDark()">🌙</button>
+</div>
 </nav>
 
-<header id="home">
-<h1>BANTY GADGETS HUB</h1>
-<p>UK 🇬🇧 Gadgets | iPhone | Samsung | Laptops | AirPods | Gaming Consoles</p>
-</header>
+<!-- BANNER -->
+<section class="banner">
+<h1>UK Gadgets & Premium Devices</h1>
+<p>Buy • Sell • Swap • Repair • Delivery Nationwide</p>
+</section>
 
 <div class="container">
 
-<h2 id="products">Featured Products</h2>
-
-<div class="products">
+<!-- PHONES -->
+<h2 id="phones">📱 Phones</h2>
+<div class="grid">
 
 <div class="card">
-<img src="https://via.placeholder.com/250x180?text=iPhone" alt="iPhone">
+<img src="https://via.placeholder.com/250?text=iPhone+15">
 <h3>iPhone 15</h3>
 <p class="price">₦1,150,000</p>
-<a class="btn" href="https://wa.me/09132155539">Order</a>
+<a class="btn" href="https://wa.me/2349132155539">Order on WhatsApp</a>
 </div>
 
 <div class="card">
-<img src="https://via.placeholder.com/250x180?text=Samsung" alt="Samsung">
+<img src="https://via.placeholder.com/250?text=Samsung+S23">
 <h3>Samsung Galaxy S23</h3>
 <p class="price">₦950,000</p>
-<a class="btn" href="https://wa.me/09132155539">Order</a>
+<a class="btn" href="https://wa.me/2349132155539">Order on WhatsApp</a>
 </div>
 
-<div class="card">
-<img src="https://via.placeholder.com/250x180?text=AirPods" alt="AirPods">
-<h3>AirPods Pro</h3>
-<p class="price">₦320,000</p>
-<a class="btn" href="https://wa.me/09132155539">Order</a>
 </div>
 
+<!-- LAPTOPS -->
+<h2 id="laptops">💻 Laptops</h2>
+<div class="grid">
+
 <div class="card">
-<img src="https://via.placeholder.com/250x180?text=PlayStation" alt="PS5">
+<img src="https://via.placeholder.com/250?text=HP+Laptop">
+<h3>HP EliteBook</h3>
+<p class="price">₦480,000</p>
+<a class="btn" href="https://wa.me/2349132155539">Order on WhatsApp</a>
+</div>
+
+</div>
+
+<!-- GAMING -->
+<h2 id="gaming">🎮 Gaming</h2>
+<div class="grid">
+
+<div class="card">
+<img src="https://via.placeholder.com/250?text=PlayStation+5">
 <h3>PlayStation 5</h3>
 <p class="price">₦1,200,000</p>
-<a class="btn" href="https://wa.me/09132155539">Order</a>
+<a class="btn" href="https://wa.me/2349132155539">Order on WhatsApp</a>
 </div>
 
 </div>
 
-<h2 id="prices">Price List</h2>
-<ul>
-<li>iPhone Series — From ₦850,000</li>
-<li>Samsung Phones — From ₦600,000</li>
-<li>Laptops — From ₦450,000</li>
-<li>Gaming Consoles — From ₦700,000</li>
-<li>AirPods — From ₦150,000</li>
-</ul>
-
-<h2 id="contact">Contact</h2>
-<p>We buy, sell, swap, repair, and deliver gadgets nationwide.</p>
-<p>Payments on delivery are not accepted.</p>
-<a class="btn" href="https://wa.me/09132155539">Chat on WhatsApp</a>
+<!-- CONTACT FORM -->
+<h2 id="contact">Contact / Order Request</h2>
+<form>
+<input type="text" placeholder="Your Name">
+<input type="tel" placeholder="Phone Number">
+<textarea placeholder="What do you want to buy?"></textarea>
+<button class="btn">Send Request</button>
+</form>
 
 </div>
 
 <footer>
-© 2026 BANTY GADGETS HUB — All Rights Reserved
+© 2026 BANTY GADGETS HUB
 </footer>
+
+<script>
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
+</script>
 
 </body>
 </html>
