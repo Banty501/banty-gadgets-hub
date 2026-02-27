@@ -1,18 +1,4 @@
-<nav>
-  <div><img src="logo_banner.png" alt="BANTY GADGETS HUB Logo" style="height:50px;"></div>
-  <div>
-    <a href="#phones">Phones</a>
-    <a href="#laptops">Laptops</a>
-    <a href="#gaming">Gaming</a>
-    <a href="#contact">Contact</a>
-    <button onclick="toggleDark()">🌙</button>
-  </div>
-</nav>
-
-<section class="banner" style="background:linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url('logo_banner.png');">
-  <h1>UK Gadgets & Premium Devices</h1>
-  <p>We Buy • Sell • Swap • Repair • Delivery Nationwide</p>
-</section><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -34,6 +20,7 @@ body{
   font-family:'Poppins', sans-serif;
   background:var(--bg);
   color:var(--text);
+  transition: background 0.3s, color 0.3s;
 }
 
 /* NAVBAR */
@@ -44,9 +31,7 @@ nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-}
-nav img{
-  height:50px;
+  flex-wrap:wrap;
 }
 nav a{
   color:white;
@@ -54,23 +39,24 @@ nav a{
   margin:0 10px;
   font-weight:600;
 }
+nav img{
+  height:50px;
+}
 
 /* BANNER */
 .banner{
-  background:linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url('banner.png');
-  background-size:cover;
-  background-position:center;
-  color:white;
-  text-align:center;
-  padding:80px 20px;
+  background: url('banner.png') no-repeat center center;
+  background-size: cover;
+  height: 400px;
+  border-radius:10px;
+  margin-bottom:20px;
 }
-.banner h1{margin:0;font-size:2.5em}
 
 /* CONTAINER */
 .container{
   max-width:1100px;
   margin:auto;
-  padding:40px 20px;
+  padding:20px;
 }
 
 /* PRODUCTS */
@@ -86,15 +72,27 @@ nav a{
   border-radius:10px;
   text-align:center;
   box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.dark .card{background:#1e1e1e}
+.card:hover{
+  transform: translateY(-5px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+.dark .card{
+  background:#1e1e1e;
+}
 
+/* PRODUCT IMAGES */
 .card img{
   width:100%;
   border-radius:8px;
+  transition: transform 0.3s;
+}
+.card img:hover{
+  transform: scale(1.05);
 }
 
-/* BUTTON */
+/* BUTTONS */
 .btn, button{
   display:inline-block;
   background:var(--primary);
@@ -105,6 +103,19 @@ nav a{
   margin-top:10px;
   border:none;
   cursor:pointer;
+  transition: background 0.3s;
+}
+.btn:hover, button:hover{
+  background:#16a34a;
+}
+
+/* CART */
+#cart{
+  list-style:none;
+  padding-left:0;
+}
+#cart li{
+  margin-bottom:5px;
 }
 
 /* FORM */
@@ -115,12 +126,29 @@ form input, form textarea{
   border-radius:6px;
   border:1px solid #ccc;
 }
+form button{
+  width:100%;
+  margin-top:10px;
+}
 
+/* FOOTER */
 footer{
   background:#111;
   color:white;
   text-align:center;
   padding:20px;
+  margin-top:20px;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  nav{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  nav div a{
+    margin:5px 0;
+  }
 }
 </style>
 </head>
@@ -128,7 +156,7 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <div><img src="logo.png" alt="BANTY GADGETS HUB"></div>
+  <div><img src="logo.png" alt="BANTY GADGETS HUB Logo"></div>
   <div>
     <a href="#phones">Phones</a>
     <a href="#laptops">Laptops</a>
@@ -137,12 +165,6 @@ footer{
     <button onclick="toggleDark()">🌙</button>
   </div>
 </nav>
-
-<!-- BANNER -->
-<section class="banner">
-<h1>BANTY GADGETS HUB</h1>
-<p>UK Gadgets & Premium Devices | Buy • Sell • Swap • Repair • Nationwide Delivery</p>
-</section>
 
 <div class="container">
 
@@ -188,10 +210,10 @@ footer{
 
 <!-- CONTACT FORM -->
 <h2 id="contact">Order Request</h2>
-<form>
-<input type="text" placeholder="Your Name">
-<input type="tel" placeholder="Phone Number">
-<textarea placeholder="What do you want to buy"></textarea>
+<form onsubmit="sendForm(event)">
+<input type="text" placeholder="Your Name" id="name" required>
+<input type="tel" placeholder="Phone Number" id="phone" required>
+<textarea placeholder="What do you want to buy" id="message" required></textarea>
 <button type="submit">Send Request</button>
 </form>
 
@@ -225,6 +247,15 @@ function sendOrder(){
     let phone = "2349132155539";
     let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
     window.open(url, "_blank");
+}
+function sendForm(e){
+    e.preventDefault();
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let message = document.getElementById("message").value;
+    let fullMessage = `Hello BANTY GADGETS HUB, Order Request from ${name} (${phone}): ${message}`;
+    let waUrl = "https://wa.me/2349132155539?text=" + encodeURIComponent(fullMessage);
+    window.open(waUrl, "_blank");
 }
 function toggleDark(){
     document.body.classList.toggle("dark");
