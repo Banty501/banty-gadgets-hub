@@ -1,0 +1,234 @@
+<nav>
+  <div><img src="logo_banner.png" alt="BANTY GADGETS HUB Logo" style="height:50px;"></div>
+  <div>
+    <a href="#phones">Phones</a>
+    <a href="#laptops">Laptops</a>
+    <a href="#gaming">Gaming</a>
+    <a href="#contact">Contact</a>
+    <button onclick="toggleDark()">🌙</button>
+  </div>
+</nav>
+
+<section class="banner" style="background:linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url('logo_banner.png');">
+  
+</section><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BANTY GADGETS HUB</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#22c55e; /* green */
+  --bg:#f4f6f9;
+  --text:#111;
+}
+.dark{
+  --bg:#121212;
+  --text:#eee;
+}
+body{
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* NAVBAR */
+nav{
+  background:var(--primary);
+  color:white;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+nav img{
+  height:50px;
+}
+nav a{
+  color:white;
+  text-decoration:none;
+  margin:0 10px;
+  font-weight:600;
+}
+
+/* BANNER */
+.banner{
+  background:linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url('banner.png');
+  background-size:cover;
+  background-position:center;
+  color:white;
+  text-align:center;
+  padding:80px 20px;
+}
+.banner h1{margin:0;font-size:2.5em}
+
+/* CONTAINER */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+/* PRODUCTS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+.dark .card{background:#1e1e1e}
+
+.card img{
+  width:100%;
+  border-radius:8px;
+}
+
+/* BUTTON */
+.btn, button{
+  display:inline-block;
+  background:var(--primary);
+  color:white;
+  padding:10px 20px;
+  border-radius:25px;
+  text-decoration:none;
+  margin-top:10px;
+  border:none;
+  cursor:pointer;
+}
+
+/* FORM */
+form input, form textarea{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+footer{
+  background:#111;
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div><img src="logo.png" alt="BANTY GADGETS HUB"></div>
+  <div>
+    <a href="#phones">Phones</a>
+    <a href="#laptops">Laptops</a>
+    <a href="#gaming">Gaming</a>
+    <a href="#contact">Contact</a>
+    <button onclick="toggleDark()">🌙</button>
+  </div>
+</nav>
+
+<!-- BANNER -->
+<section class="banner">
+<h1>BANTY GADGETS HUB</h1>
+<p>UK Gadgets & Premium Devices | Buy • Sell • Swap • Repair • Nationwide Delivery</p>
+</section>
+
+<div class="container">
+
+<!-- PRODUCTS -->
+<h2 id="phones">📱 Products</h2>
+<div class="grid">
+
+<div class="card">
+<img src="iphone.jpeg" alt="iPhone">
+<h3>iPhone</h3>
+<button onclick="addToCart('iPhone')">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="samsung.jpeg" alt="Samsung">
+<h3>Samsung</h3>
+<button onclick="addToCart('Samsung')">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="laptop.jpeg" alt="Laptop">
+<h3>Laptop</h3>
+<button onclick="addToCart('Laptop')">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="macbook.jpeg" alt="MacBook">
+<h3>MacBook</h3>
+<button onclick="addToCart('MacBook')">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="airpod.jpeg" alt="AirPods">
+<h3>AirPods</h3>
+<button onclick="addToCart('AirPods')">Add to Cart</button>
+</div>
+
+</div>
+
+<h2>Your Cart</h2>
+<ul id="cart"></ul>
+<button onclick="sendOrder()">Order via WhatsApp</button>
+
+<!-- CONTACT FORM -->
+<h2 id="contact">Order Request</h2>
+<form>
+<input type="text" placeholder="Your Name">
+<input type="tel" placeholder="Phone Number">
+<textarea placeholder="What do you want to buy"></textarea>
+<button type="submit">Send Request</button>
+</form>
+
+</div>
+
+<footer>
+WhatsApp: 09132155539
+</footer>
+
+<script>
+let cart = [];
+function addToCart(product){
+    cart.push(product);
+    displayCart();
+}
+function displayCart(){
+    let cartList = document.getElementById("cart");
+    cartList.innerHTML = "";
+    cart.forEach(item => {
+        let li = document.createElement("li");
+        li.textContent = item;
+        cartList.appendChild(li);
+    });
+}
+function sendOrder(){
+    if(cart.length === 0){
+        alert("Cart is empty");
+        return;
+    }
+    let message = "Hello BANTY GADGETS HUB, I want to order: " + cart.join(", ");
+    let phone = "2349132155539";
+    let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+    window.open(url, "_blank");
+}
+function toggleDark(){
+    document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

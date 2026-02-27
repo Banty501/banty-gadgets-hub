@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --primary:#22c55e; /* green */
+  --primary:#22c55e;
   --bg:#f4f6f9;
   --text:#111;
 }
@@ -31,16 +31,13 @@ nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  flex-wrap:wrap;
 }
+nav img{height:50px;}
 nav a{
   color:white;
   text-decoration:none;
   margin:0 10px;
   font-weight:600;
-}
-nav img{
-  height:50px;
 }
 
 /* BANNER */
@@ -56,7 +53,7 @@ nav img{
 .container{
   max-width:1100px;
   margin:auto;
-  padding:20px;
+  padding:40px 20px;
 }
 
 /* PRODUCTS */
@@ -66,6 +63,28 @@ nav img{
   gap:20px;
 }
 
+/* Mobile carousel */
+@media(max-width:768px){
+  .grid{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom:10px;
+  }
+  .card{
+    min-width:180px;
+    scroll-snap-align:start;
+    flex-shrink:0;
+    margin-right:10px;
+  }
+  .grid::after{
+    content:'';
+    flex:0 0 10px;
+  }
+}
+
+/* PRODUCT CARDS */
 .card{
   background:white;
   padding:20px;
@@ -78,19 +97,13 @@ nav img{
   transform: translateY(-5px);
   box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
-.dark .card{
-  background:#1e1e1e;
-}
-
-/* PRODUCT IMAGES */
+.dark .card{background:#1e1e1e;}
 .card img{
   width:100%;
   border-radius:8px;
   transition: transform 0.3s;
 }
-.card img:hover{
-  transform: scale(1.05);
-}
+.card img:hover{transform:scale(1.05);}
 
 /* BUTTONS */
 .btn, button{
@@ -103,20 +116,12 @@ nav img{
   margin-top:10px;
   border:none;
   cursor:pointer;
-  transition: background 0.3s;
 }
-.btn:hover, button:hover{
-  background:#16a34a;
-}
+.btn:hover, button:hover{background:#16a34a;}
 
 /* CART */
-#cart{
-  list-style:none;
-  padding-left:0;
-}
-#cart li{
-  margin-bottom:5px;
-}
+#cart{list-style:none;padding-left:0;}
+#cart li{margin-bottom:5px;}
 
 /* FORM */
 form input, form textarea{
@@ -126,10 +131,7 @@ form input, form textarea{
   border-radius:6px;
   border:1px solid #ccc;
 }
-form button{
-  width:100%;
-  margin-top:10px;
-}
+form button{width:100%; margin-top:10px;}
 
 /* FOOTER */
 footer{
@@ -140,23 +142,54 @@ footer{
   margin-top:20px;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE NAV */
 @media(max-width:600px){
-  nav{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-  nav div a{
-    margin:5px 0;
-  }
+  nav{flex-direction:column; align-items:flex-start;}
+  nav div a{margin:5px 0;}
 }
+
+/* EDGE SHADOWS for mobile carousel */
+.grid::-webkit-scrollbar{display:none;}
+.grid{position:relative;}
+.grid::before, .grid::after{
+  content:'';
+  position:absolute;
+  top:0; bottom:0;
+  width:30px;
+  pointer-events:none;
+}
+.grid::before{
+  left:0;
+  background:linear-gradient(to right, var(--bg) 0%, transparent 100%);
+}
+.grid::after{
+  right:0;
+  background:linear-gradient(to left, var(--bg) 0%, transparent 100%);
+}
+
+/* SWIPE ARROWS */
+.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:var(--primary);
+  color:white;
+  border:none;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+  cursor:pointer;
+  z-index:10;
+}
+.arrow-left{left:5px;}
+.arrow-right{right:5px;}
+.arrow:hover{background:#16a34a;}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div><img src="logo.png" alt="BANTY GADGETS HUB Logo"></div>
+  <div><img src="logo.png" alt="BANTY GADGETS HUB"></div>
   <div>
     <a href="#phones">Phones</a>
     <a href="#laptops">Laptops</a>
@@ -166,36 +199,36 @@ footer{
   </div>
 </nav>
 
-<div class="container">
+<section class="banner"></section>
 
-<!-- PRODUCTS -->
+<div class="container">
 <h2 id="phones">📱 Products</h2>
-<div class="grid">
+
+<div style="position:relative;">
+<button class="arrow arrow-left" onclick="scrollGrid(-1)">‹</button>
+<button class="arrow arrow-right" onclick="scrollGrid(1)">›</button>
+<div class="grid" id="productGrid">
 
 <div class="card">
 <img src="iphone.jpeg" alt="iPhone">
 <h3>iPhone</h3>
 <button onclick="addToCart('iPhone')">Add to Cart</button>
 </div>
-
 <div class="card">
 <img src="samsung.jpeg" alt="Samsung">
 <h3>Samsung</h3>
 <button onclick="addToCart('Samsung')">Add to Cart</button>
 </div>
-
 <div class="card">
 <img src="laptop.jpeg" alt="Laptop">
 <h3>Laptop</h3>
 <button onclick="addToCart('Laptop')">Add to Cart</button>
 </div>
-
 <div class="card">
 <img src="macbook.jpeg" alt="MacBook">
 <h3>MacBook</h3>
 <button onclick="addToCart('MacBook')">Add to Cart</button>
 </div>
-
 <div class="card">
 <img src="airpod.jpeg" alt="AirPods">
 <h3>AirPods</h3>
@@ -203,12 +236,12 @@ footer{
 </div>
 
 </div>
+</div>
 
 <h2>Your Cart</h2>
 <ul id="cart"></ul>
 <button onclick="sendOrder()">Order via WhatsApp</button>
 
-<!-- CONTACT FORM -->
 <h2 id="contact">Order Request</h2>
 <form onsubmit="sendForm(event)">
 <input type="text" placeholder="Your Name" id="name" required>
@@ -216,50 +249,18 @@ footer{
 <textarea placeholder="What do you want to buy" id="message" required></textarea>
 <button type="submit">Send Request</button>
 </form>
-
 </div>
 
-<footer>
-WhatsApp: 09132155539
-</footer>
+<footer>WhatsApp: 09132155539</footer>
 
 <script>
-let cart = [];
-function addToCart(product){
-    cart.push(product);
-    displayCart();
-}
-function displayCart(){
-    let cartList = document.getElementById("cart");
-    cartList.innerHTML = "";
-    cart.forEach(item => {
-        let li = document.createElement("li");
-        li.textContent = item;
-        cartList.appendChild(li);
-    });
-}
-function sendOrder(){
-    if(cart.length === 0){
-        alert("Cart is empty");
-        return;
-    }
-    let message = "Hello BANTY GADGETS HUB, I want to order: " + cart.join(", ");
-    let phone = "2349132155539";
-    let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
-    window.open(url, "_blank");
-}
-function sendForm(e){
-    e.preventDefault();
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
-    let message = document.getElementById("message").value;
-    let fullMessage = `Hello BANTY GADGETS HUB, Order Request from ${name} (${phone}): ${message}`;
-    let waUrl = "https://wa.me/2349132155539?text=" + encodeURIComponent(fullMessage);
-    window.open(waUrl, "_blank");
-}
-function toggleDark(){
-    document.body.classList.toggle("dark");
-}
+let cart=[];
+function addToCart(p){cart.push(p);displayCart();}
+function displayCart(){let c=document.getElementById("cart");c.innerHTML="";cart.forEach(i=>{let li=document.createElement("li");li.textContent=i;c.appendChild(li);});}
+function sendOrder(){if(cart.length===0){alert("Cart is empty");return;}let m="Hello BANTY GADGETS HUB, I want to order: "+cart.join(", ");let p="2349132155539";window.open("https://wa.me/"+p+"?text="+encodeURIComponent(m),"_blank");}
+function sendForm(e){e.preventDefault();let n=document.getElementById("name").value,p=document.getElementById("phone").value,m=document.getElementById("message").value,f=`Hello BANTY GADGETS HUB, Order Request from ${n} (${p}): ${m}`;window.open("https://wa.me/2349132155539?text="+encodeURIComponent(f),"_blank");}
+function toggleDark(){document.body.classList.toggle("dark");}
+function scrollGrid(dir){const g=document.getElementById("productGrid");g.scrollBy({left:dir*200,behavior:'smooth'});}
 </script>
 
 </body>
