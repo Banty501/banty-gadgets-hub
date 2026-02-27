@@ -23,34 +23,16 @@ body{
   transition: background 0.3s, color 0.3s;
 }
 
-/* NAVBAR */
-nav{
-  background:var(--primary);
-  color:white;
-  padding:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-}
-nav img{
-  height:50px;
-}
-nav a{
-  color:white;
-  text-decoration:none;
-  margin:0 10px;
-  font-weight:600;
-}
-
 /* BANNER */
 .banner{
   background: url('banner.png') no-repeat center center;
-  background-size:cover;
-  height:400px;
+  background-size: cover;
+  height: 400px;
   border-radius:10px;
   margin-bottom:20px;
+  position: relative;
 }
+.dark .banner{opacity:0.9;}
 
 /* CONTAINER */
 .container{
@@ -59,19 +41,17 @@ nav a{
   padding:20px;
 }
 
-/* PRODUCTS - HORIZONTAL SCROLL */
+/* PRODUCTS */
 .grid{
-  display:flex;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
   gap:15px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
+  overflow-x:auto; /* allow horizontal scroll on small screens */
+  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  padding-bottom:10px;
 }
-
 .card{
-  flex:0 0 150px;  /* fixed width for mobile scroll */
-  scroll-snap-align:start;
+  scroll-snap-align: start;
   background:white;
   padding:15px;
   border-radius:10px;
@@ -83,41 +63,36 @@ nav a{
   transform: translateY(-5px);
   box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
-.dark .card{
-  background:#1e1e1e;
-}
+.dark .card{background:#1e1e1e;}
 
 .card img{
   width:100%;
-  height:auto;
   border-radius:8px;
+  transition: transform 0.3s;
+}
+.card img:hover{
+  transform: scale(1.05);
 }
 
 /* BUTTONS */
-.btn, button{
+button{
   display:inline-block;
   background:var(--primary);
   color:white;
-  padding:10px 15px;
+  padding:8px 18px;
   border-radius:25px;
-  text-decoration:none;
-  margin-top:10px;
+  margin-top:8px;
   border:none;
   cursor:pointer;
-  transition: background 0.3s;
 }
-.btn:hover, button:hover{
-  background:#16a34a;
-}
+button:hover{background:#16a34a;}
 
 /* CART */
 #cart{
   list-style:none;
   padding-left:0;
 }
-#cart li{
-  margin-bottom:5px;
-}
+#cart li{margin-bottom:5px;}
 
 /* FORM */
 form input, form textarea{
@@ -127,10 +102,7 @@ form input, form textarea{
   border-radius:6px;
   border:1px solid #ccc;
 }
-form button{
-  width:100%;
-  margin-top:10px;
-}
+form button{width:100%; margin-top:10px;}
 
 /* FOOTER */
 footer{
@@ -140,32 +112,14 @@ footer{
   padding:20px;
   margin-top:20px;
 }
-
-/* RESPONSIVE */
-@media(max-width:600px){
-  nav{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-  nav div a{
-    margin:5px 0;
-  }
-}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div><img src="logo.png" alt="BANTY GADGETS HUB Logo"></div>
-  <div>
-    <a href="#phones">Phones</a>
-    <a href="#laptops">Laptops</a>
-    <a href="#gaming">Gaming</a>
-    <a href="#contact">Contact</a>
-    <button onclick="toggleDark()">🌙</button>
-  </div>
-</nav>
+<!-- DARK MODE TOGGLE -->
+<div style="text-align:right; padding:10px;">
+  <button onclick="toggleDark()">🌙 Dark Mode</button>
+</div>
 
 <!-- BANNER -->
 <section class="banner"></section>
@@ -175,37 +129,31 @@ footer{
 <!-- PRODUCTS -->
 <h2 id="phones">📱 Products</h2>
 <div class="grid">
-
-<div class="card">
-<img src="iphone.jpeg" alt="iPhone">
-<h3>iPhone</h3>
-<button onclick="addToCart('iPhone')">Add to Cart</button>
-</div>
-
-<div class="card">
-<img src="samsung.jpeg" alt="Samsung">
-<h3>Samsung</h3>
-<button onclick="addToCart('Samsung')">Add to Cart</button>
-</div>
-
-<div class="card">
-<img src="laptop.jpeg" alt="Laptop">
-<h3>Laptop</h3>
-<button onclick="addToCart('Laptop')">Add to Cart</button>
-</div>
-
-<div class="card">
-<img src="macbook.jpeg" alt="MacBook">
-<h3>MacBook</h3>
-<button onclick="addToCart('MacBook')">Add to Cart</button>
-</div>
-
-<div class="card">
-<img src="airpod.jpeg" alt="AirPods">
-<h3>AirPods</h3>
-<button onclick="addToCart('AirPods')">Add to Cart</button>
-</div>
-
+  <div class="card">
+    <img src="iphone.jpeg" alt="iPhone">
+    <h3>iPhone</h3>
+    <button onclick="addToCart('iPhone')">Add to Cart</button>
+  </div>
+  <div class="card">
+    <img src="samsung.jpeg" alt="Samsung">
+    <h3>Samsung</h3>
+    <button onclick="addToCart('Samsung')">Add to Cart</button>
+  </div>
+  <div class="card">
+    <img src="laptop.jpeg" alt="Laptop">
+    <h3>Laptop</h3>
+    <button onclick="addToCart('Laptop')">Add to Cart</button>
+  </div>
+  <div class="card">
+    <img src="macbook.jpeg" alt="MacBook">
+    <h3>MacBook</h3>
+    <button onclick="addToCart('MacBook')">Add to Cart</button>
+  </div>
+  <div class="card">
+    <img src="airpod.jpeg" alt="AirPods">
+    <h3>AirPods</h3>
+    <button onclick="addToCart('AirPods')">Add to Cart</button>
+  </div>
 </div>
 
 <h2>Your Cart</h2>
@@ -215,10 +163,10 @@ footer{
 <!-- CONTACT FORM -->
 <h2 id="contact">Order Request</h2>
 <form onsubmit="sendForm(event)">
-<input type="text" placeholder="Your Name" id="name" required>
-<input type="tel" placeholder="Phone Number" id="phone" required>
-<textarea placeholder="What do you want to buy" id="message" required></textarea>
-<button type="submit">Send Request</button>
+  <input type="text" placeholder="Your Name" id="name" required>
+  <input type="tel" placeholder="Phone Number" id="phone" required>
+  <textarea placeholder="What do you want to buy" id="message" required></textarea>
+  <button type="submit">Send Request</button>
 </form>
 
 </div>
@@ -258,7 +206,7 @@ function sendForm(e){
     let phone = document.getElementById("phone").value;
     let message = document.getElementById("message").value;
     let fullMessage = `Hello BANTY GADGETS HUB, Order Request from ${name} (${phone}): ${message}`;
-    let waUrl = "https://wa.me/2349132155539?text=` + encodeURIComponent(fullMessage);
+    let waUrl = "https://wa.me/2349132155539?text=" + encodeURIComponent(fullMessage);
     window.open(waUrl, "_blank");
 }
 function toggleDark(){
